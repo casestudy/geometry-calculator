@@ -1,6 +1,6 @@
 <div class="container" id="welcome-page">
     <h1>Welcome to the Geometry Calculator. Sharpen your Mathematical Skills</h1>
-    <h3>Choose a figure and your operation to start having hun</h3>
+    <h2>Choose a figure and your operation to start having hun</h2>
 
 	<!-- Cards representing the figures -->
     <div class="row">
@@ -69,10 +69,28 @@
 
 	<!-- This section will contain the input fields for values -->
 	<div class="container" [ngSwitch]="figure">
-		<div *ngSwitchCase="'circle'">
+		<div *ngSwitchCase="'circle'" class="figure-op-box">
 			<div [ngSwitch]="operation">
 				<div *ngSwitchCase="'area'">
-					<p>We are in a circle area</p>
+					<h1>Calculate the Area of a Circle </h1>
+					<p>To calculate the area of a circle, we need the radius. The formula is given as</p>
+					<div class="row">
+						<div class="col-md-5">
+							<form class="example-form">
+								<mat-form-field class="example-full-width" appearance="fill">
+									  <mat-label>Radius</mat-label> 
+									  <!-- Giving an input type number means only number can be typed and no text can be entered -->
+									  <input type="number" matInput [(ngModel)]="radiusFormValue" [ngModelOptions]="{standalone: true}" placeholder="Enter the radius" value="">
+									  <mat-hint>{{errorMessage}}</mat-hint>	
+								</mat-form-field>
+							</form>
+							<br/>
+							<button mat-button mat-raised-button color="primary" (click)="calculateArea('circle')">Calculate</button>
+						</div>
+						<div class="col-md-7">
+							<p>{{areaValue}}</p>
+						</div>
+					</div>
 				</div>
 
 				<div *ngSwitchCase="'perimeter'">
@@ -81,7 +99,7 @@
 			</div>
 		</div>
 
-		<div *ngSwitchCase="'square'">
+		<div *ngSwitchCase="'square'" class="figure-op-box">
 			<div [ngSwitch]="operation">
 				<div *ngSwitchCase="'area'">
 					<p>We are in a square area</p>
@@ -93,7 +111,7 @@
 			</div>
 		</div>
 
-		<div *ngSwitchCase="'triangle'">
+		<div *ngSwitchCase="'triangle'" class="figure-op-box">
 			<div [ngSwitch]="operation">
 				<div *ngSwitchCase="'area'">
 					<p>We are in a triangle area</p>

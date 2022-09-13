@@ -4,6 +4,7 @@
 
 #welcome-page h1, h2, h3, h4, h5 {
     text-align: center;
+    font-weight: bolder;
 }
 
 .circle-base {
@@ -24,4 +25,22 @@
     height: 200px;
 	margin: auto;
     background: linear-gradient(to bottom left, #fff 0%, #fff 50%, #4bc475 50%, #4bc475 100%);
+}
+
+.figure-op-box {
+    margin-top: 30px;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.example-full-width {
+    width: 100%;
+}
+
+mat-hint {
+    color: red;
 }
