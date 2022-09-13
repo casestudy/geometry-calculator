@@ -10,12 +10,14 @@ import {MatCardModule} from '@angular/material/card'
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { AreaComponent } from './area/area.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    AreaComponent
   ],
   imports: [
     BrowserModule,

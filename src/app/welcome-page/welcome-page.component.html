@@ -2,6 +2,7 @@
     <h1>Welcome to the Geometry Calculator. Sharpen your Mathematical Skills</h1>
     <h3>Choose a figure and your operation to start having hun</h3>
 
+	<!-- Cards representing the figures -->
     <div class="row">
         <div class="col-md-4">
             <mat-card class="example-card">
@@ -18,8 +19,8 @@
 					</p>
                 </mat-card-content>
                 <mat-card-actions>
-					<button mat-button mat-raised-button color="accent">LIKE</button>
-					<button mat-button mat-raised-button color="warn">SHARE</button>
+					<button mat-button mat-raised-button color="accent" (click)="setFigureParams('circle','area')">AREA</button>
+					<button mat-button mat-raised-button color="warn" (click)="setFigureParams('circle','perimeter')">PERIMETER</button>
                 </mat-card-actions>
             </mat-card>
         </div>
@@ -39,8 +40,8 @@
 					</p>
                 </mat-card-content>
                 <mat-card-actions>
-					<button mat-button mat-raised-button color="accent">LIKE</button>
-					<button mat-button mat-raised-button color="warn">SHARE</button>
+					<button mat-button mat-raised-button color="accent" (click)="setFigureParams('square','area')">AREA</button>
+					<button mat-button mat-raised-button color="warn" (click)="setFigureParams('square','perimeter')">PERIMETER</button>
                 </mat-card-actions>
             </mat-card>
         </div>
@@ -59,10 +60,50 @@
 					</p>
                 </mat-card-content>
                 <mat-card-actions>
-					<button mat-button mat-raised-button color="accent">LIKE</button>
-					<button mat-button mat-raised-button color="warn">SHARE</button>
+					<button mat-button mat-raised-button color="accent" (click)="setFigureParams('triangle','area')">AREA</button>
+					<button mat-button mat-raised-button color="warn" (click)="setFigureParams('triangle','perimeter')">PERIMETER</button>
                 </mat-card-actions>
             </mat-card>
         </div>
     </div>
+
+	<!-- This section will contain the input fields for values -->
+	<div class="container" [ngSwitch]="figure">
+		<div *ngSwitchCase="'circle'">
+			<div [ngSwitch]="operation">
+				<div *ngSwitchCase="'area'">
+					<p>We are in a circle area</p>
+				</div>
+
+				<div *ngSwitchCase="'perimeter'">
+					<p>We are in a circle perimeter</p>
+				</div>
+			</div>
+		</div>
+
+		<div *ngSwitchCase="'square'">
+			<div [ngSwitch]="operation">
+				<div *ngSwitchCase="'area'">
+					<p>We are in a square area</p>
+				</div>
+
+				<div *ngSwitchCase="'perimeter'">
+					<p>We are in a square perimeter</p>
+				</div>
+			</div>
+		</div>
+
+		<div *ngSwitchCase="'triangle'">
+			<div [ngSwitch]="operation">
+				<div *ngSwitchCase="'area'">
+					<p>We are in a triangle area</p>
+				</div>
+
+				<div *ngSwitchCase="'perimeter'">
+					<p>We are in a triangle perimeter</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
