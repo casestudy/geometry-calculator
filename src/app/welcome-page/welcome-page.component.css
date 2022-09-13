@@ -6,6 +6,22 @@
     text-align: center;
 }
 
-#welcome-cards {
-    text-align: center;
+.circle-base {
+    border-radius: 50%;
+	margin: auto;
+}
+  
+.circle, .square {
+    width: 200px;
+    height: 200px;
+    background: #4bc475;
+    border: 1px solid #000;
+	margin: auto;
+}
+
+.triangle {
+    width: 200px;
+    height: 200px;
+	margin: auto;
+    background: linear-gradient(to bottom left, #fff 0%, #fff 50%, #4bc475 50%, #4bc475 100%);
 }
