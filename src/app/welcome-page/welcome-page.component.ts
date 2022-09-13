@@ -11,11 +11,15 @@ export class WelcomePageComponent implements OnInit {
 
 	figure = 'circle';
 	operation = 'area';
-	radiusFormValue = '';
+	radiusFormValue: number;
 	errorMessage = '';
-	areaValue = '';
+	areaValue: number;
+	areaValueMessage = '';
 
-	constructor() { }
+	constructor() {
+		this.areaValue = 0;
+		this.radiusFormValue = 0;
+	}
 
 	ngOnInit(): void {
 	}
@@ -43,15 +47,16 @@ export class WelcomePageComponent implements OnInit {
 
 	calculateArea(fig:string) {
 		if(fig === 'circle') {
-			console.log("Wandafut 343");
-			if(this.radiusFormValue && this.radiusFormValue.length > 0) {
+			if(this.radiusFormValue > 0) {
+				console.log(this.radiusFormValue);
 				if(Number.isFinite(this.radiusFormValue)) {
-					this.areaValue = 'Tha area of your circle with radius ' + this.radiusFormValue + ' is: ' + this.areaValue 
+					this.areaValue = Math.PI * this.radiusFormValue * this.radiusFormValue;
+					this.areaValueMessage = 'Tha area of your circle with radius ' + this.radiusFormValue + ' is: ' + this.areaValue 
 				} else {
-					this.errorMessage = 'Please supply a valid value for the radius.';
+					this.errorMessage = 'Please supply a valid value for the radius.'; //Value is not a number
 				}
 			} else {
-				this.errorMessage = 'Please supply a value for the radius.';
+				this.errorMessage = 'Please supply a value for the radius.'; //radius cannot be negative or zero
 			}	
 		} else {
 			console.log("Wandafut");
