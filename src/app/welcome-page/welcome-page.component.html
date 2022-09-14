@@ -96,7 +96,7 @@
 							<button class="area-button" mat-button mat-raised-button color="primary" (click)="calculateArea('circle')">Calculate</button>
 						</div>
 						<div class="col-md-5">
-							<p>{{areaValueMessage}}</p>
+							<p>{{answerValueMessage}}</p>
 						</div>
 						<div class="col-md-2">
 							<mat-form-field appearance="fill">
@@ -114,7 +114,45 @@
 				</div>
 
 				<div *ngSwitchCase="'perimeter'">
-					<p>We are in a circle perimeter</p>
+					<h1>Calculate the Perimeter of a Circle </h1>
+					<p>To calculate the perimeter of a circle, we need the radius. The formula is given as</p>
+					<div class="row">
+						<div class="col-md-5">
+							<mat-form-field class="example-full-width" appearance="fill">
+									<mat-label>Radius</mat-label> 
+									<!-- Giving an input type number means only number can be typed and no text can be entered -->
+									<input type="number" size="100" matInput [(ngModel)]="radiusFormValue" [ngModelOptions]="{standalone: true}" placeholder="Enter the radius" value="">
+									<mat-hint>{{errorMessage}}</mat-hint>	
+							</mat-form-field>
+
+							<mat-form-field appearance="fill">
+								<mat-label>Units</mat-label>
+								<mat-select required [(ngModel)]="unitSelected">
+									<mat-option value="cm">Centimeter</mat-option>
+									<mat-option value="dm">Decimeter</mat-option>
+									<mat-option value="m">Meter</mat-option>
+									<mat-option value="km">Kilometer</mat-option>
+								</mat-select>
+							</mat-form-field>
+							
+							<button class="area-button" mat-button mat-raised-button color="primary" (click)="calculatePerimeter('circle')">Calculate</button>
+						</div>
+						<div class="col-md-5">
+							<p>{{answerValueMessage}}</p>
+						</div>
+						<div class="col-md-2">
+							<mat-form-field appearance="fill">
+								<mat-label>Convert area</mat-label>
+								<mat-select required (selectionChange)="answerUnitsChanged()" [(value)]="selectedAnswerUnit">
+									<mat-option value="cm">Centimeter</mat-option>
+									<mat-option value="dm">Decimeter</mat-option>
+									<mat-option value="m">Meter</mat-option>
+									<mat-option value="km">Kilometer</mat-option>
+								</mat-select>
+								<mat-hint>{{answerErrorMessage}}</mat-hint>
+							</mat-form-field>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

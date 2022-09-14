@@ -14,17 +14,21 @@ export class WelcomePageComponent implements OnInit {
 	radiusFormValue: number;
 	errorMessage = '';
 	answerErrorMessage = '';
-	areaValue: number;
-	areaValueMessage = '';
+	answerValue: number;
+	answerValueMessage = '';
+
+	perimeterValue: number;
 
 	unitSelected: string ;
 	selectedAnswerUnit: string ;
 
 	constructor() {
-		this.areaValue = 0;
+		this.answerValue = 0;
 		this.radiusFormValue = 0;
 		this.unitSelected = 'm';
 		this.selectedAnswerUnit = 'm'
+
+		this.perimeterValue = 0;
 	}
 
 	ngOnInit(): void {
@@ -52,7 +56,7 @@ export class WelcomePageComponent implements OnInit {
 	}
 
 	answerUnitsChanged() {
-		if(this.areaValue > 0) { //Atleast the area have been calculated
+		if(this.answerValue > 0) { //Atleast the area have been calculated
 			switch (this.selectedAnswerUnit) {
 				case 'm':
 					switch (this.unitSelected) {
@@ -62,14 +66,14 @@ export class WelcomePageComponent implements OnInit {
 							console.log("Value changed to " + this.selectedAnswerUnit);
 							if(this.operation === 'area') {
 								//We are converting for area
-								this.areaValue = this.areaValue/1000 ;
+								this.answerValue = this.answerValue/1000 ;
 								this.selectedAnswerUnit = 'm';
-								this.areaValueMessage = 'Tha area of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.areaValue + ' ' + this.selectedAnswerUnit + ' sq';
+								this.answerValueMessage = 'The area of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.answerValue + ' ' + this.selectedAnswerUnit + ' sq';
 							} else {
 								//We are converting for perimeter
-								//this.areaValue = this.areaValue/100 ;
-								console.log("Inn the perimeter section");
+								this.answerValue = this.answerValue/100 ;
 								this.selectedAnswerUnit = 'm'
+								this.answerValueMessage = 'The perimeter of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.answerValue + ' ' + this.selectedAnswerUnit + ' sq'; 
 							}
 
 							break;
@@ -78,12 +82,49 @@ export class WelcomePageComponent implements OnInit {
 							//Doesn't really make sense but users are crazy
 							if(this.operation === 'area') {
 								//We are converting for area
-								this.areaValue = this.areaValue/1000 ;
+								this.answerValue = this.answerValue ;
 								this.selectedAnswerUnit = 'm';
 							} else {
 								//We are converting for perimeter
-								//this.areaValue = this.areaValue/100 ;
+								//this.answerValue = this.answerValue/100 ;
 								this.selectedAnswerUnit = 'm'
+							}
+							break;
+					
+						default:
+							break;
+					}
+					break;
+				case 'cm':
+					switch (this.unitSelected) {
+						case 'cm':
+							//We are converting the answer value from cm to cm. 
+							//Doesnt really make sense
+							console.log("Value changed to " + this.selectedAnswerUnit);
+							if(this.operation === 'area') {
+								//We are converting for area
+								this.selectedAnswerUnit = 'cm';
+								this.answerValueMessage = 'The area of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.answerValue + ' ' + this.selectedAnswerUnit + ' sq';
+							} else {
+								//We are converting for perimeter
+								this.selectedAnswerUnit = 'cm';
+								this.answerValueMessage = 'The area of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.answerValue + ' ' + this.selectedAnswerUnit + ' sq';
+							}
+
+							break;
+						case 'm':
+							//We are converting from meter to cm
+							//Doesn't really make sense but users are crazy
+							if(this.operation === 'area') {
+								//We are converting for area
+								this.answerValue = this.answerValue * 1000 ;
+								this.selectedAnswerUnit = 'cm';
+								this.answerValueMessage = 'The area of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.answerValue + ' ' + this.selectedAnswerUnit + ' sq';
+							} else {
+								//We are converting for perimeter
+								this.answerValue = this.answerValue*100 ;
+								this.selectedAnswerUnit = 'cm'
+								this.answerValueMessage = 'The perimeter of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.answerValue + ' ' + this.selectedAnswerUnit + ' sq';
 							}
 							break;
 					
@@ -106,8 +147,25 @@ export class WelcomePageComponent implements OnInit {
 		if(fig === 'circle') {
 			if(this.radiusFormValue > 0) {
 				if(Number.isFinite(this.radiusFormValue)) {
-					this.areaValue = Math.PI * this.radiusFormValue * this.radiusFormValue;
-					this.areaValueMessage = 'Tha area of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.areaValue + ' ' + this.unitSelected + ' sq'; 
+					this.answerValue = Math.PI * this.radiusFormValue * this.radiusFormValue;
+					this.answerValueMessage = 'Tha area of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.answerValue + ' ' + this.unitSelected + ' sq'; 
+				} else {
+					this.errorMessage = 'Please supply a valid value for the radius.'; //Value is not a number
+				}
+			} else {
+				this.errorMessage = 'Please supply a value for the radius.'; //radius cannot be negative or zero
+			}	
+		} else {
+			console.log("Wandafut");
+		}
+	}
+
+	calculatePerimeter(fig:string) {
+		if(fig === 'circle') {
+			if(this.radiusFormValue > 0) {
+				if(Number.isFinite(this.radiusFormValue)) {
+					this.answerValue = 2 * Math.PI * this.radiusFormValue ;
+					this.answerValueMessage = 'Tha perimeter of your circle with radius ' + this.radiusFormValue + ' ' + this.unitSelected + ' is: ' + this.answerValue + ' ' + this.unitSelected + ' sq'; 
 				} else {
 					this.errorMessage = 'Please supply a valid value for the radius.'; //Value is not a number
 				}
